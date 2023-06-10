@@ -1,4 +1,5 @@
 ---
+import type { MarkdownInstance } from "astro";
 import BlogPost from "../../components/BlogPost.astro";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 
@@ -24,7 +25,14 @@ export async function getStaticPaths() {
 }
 
 const { tag } = Astro.params;
-const { posts } = Astro.props;
+const { posts } = Astro.props as {
+    posts: {
+        url: string;
+        frontmatter: {
+            title: string;
+        };
+    }[];
+};
 ---
 
 <BaseLayout pageTitle={tag as string}>
